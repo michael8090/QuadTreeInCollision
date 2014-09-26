@@ -1,3 +1,5 @@
-# this is a readme file
+# QuadTreeInCollision
 
-it's a experiment that uses quad tree in collision test
+It's a experiment that uses quad tree in collision test
+
+See the live demo [here](http://undefined.im/)
