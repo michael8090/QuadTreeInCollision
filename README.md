@@ -1,5 +1,5 @@
 # QuadTreeInCollision
 
-It's a experiment that uses quad tree in collision test
+It's an experiment that uses quad tree in collision test
 
 See the live demo [here](http://undefined.im/)

@@ -112,12 +112,10 @@ $ARRAY = {
         this.buildQuadTree();
 
         var span = document.createElement('span');
-        span.style.position = 'absolute';
-        span.style.left = '0px';
-        span.style.top = '0px';
-        span.cssText = 'position: absolute; left: 0px; top: 0px;';
+        span.style.cssText = 'position: absolute; left: 10px; top: 10px;';
+        span.innerHTML = 'the number of bubbles involved in a hit test: <label></label>'
         document.body.appendChild(span);
-        this.span = span;
+        this.label = span.querySelector('label');
     }
 
     Stage.prototype = {
@@ -172,7 +170,7 @@ $ARRAY = {
                 ss = [];
                 quadTree.retrieve({x: x, y: y, w: 0, h: 0}, ss);
             }
-            this.span.innerText = ss.length;
+            this.label.innerText = ss.length + 1;
             for (var i = 0, len = ss.length; i < len; i++) {
                 var s = ss[i];
                 var g = s.geometry;
@@ -191,7 +189,7 @@ $ARRAY = {
                     ss = [];
                     this.quadTree.retrieve(sprite.getRect(), ss);
                 }
-                this.span.innerText = ss.length;
+                this.label.innerText = ss.length + 1;
                 $ARRAY.forEach(ss, function(s) {
                     if (sprite !== s && sprite.isCollided(s)) {
                         sprite.color = HIGHLIGHT_COLOR;
@@ -202,10 +200,18 @@ $ARRAY = {
         }
     };
 
+    var stage,
+        isPlaying = false;
+
     window.Game = {
-        start: function (spritesNumber) {
-            var stage = new Stage(spritesNumber);
+        init: function (spritesNumber) {
+            stage = new Stage(spritesNumber);
+        },
+        start: function () {
             function draw() {
+                if (!isPlaying) {
+                    return;
+                }
                 stage.clear();
                 stage.move();
                 stage.buildQuadTree();
@@ -214,7 +220,14 @@ $ARRAY = {
                 stage.draw();
                 requestAnimationFrame(draw);
             }
+            isPlaying = true;
             requestAnimationFrame(draw);
+        },
+        pause: function () {
+            isPlaying = false;
+        },
+        toggle: function () {
+            isPlaying ? Game.pause() : Game.start();
         }
     }
 })();

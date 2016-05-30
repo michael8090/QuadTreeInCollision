@@ -8,7 +8,9 @@
 <!--<script src="quadTree.js"></script>-->
 <script>
     window.onload = function() {
-        Game.start(500);
+        Game.init(500);
+        Game.start();
+        document.body.onclick = Game.toggle;
     };
 </script>
 </body>

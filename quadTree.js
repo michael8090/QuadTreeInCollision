@@ -16,7 +16,7 @@
     };
     QuadTree.prototype = {
         maxLevel: Infinity,
-        maxChildrenNumber: 100,
+        maxChildrenNumber: 0, // the number for hit test is neat when it's set to 100
         getIndex: function(rect) {
             var mainRect = this.rect,
                 hw = mainRect.w / 2,

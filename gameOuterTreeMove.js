@@ -146,7 +146,7 @@ $ARRAY = {
         span.style.top = '0px';
         span.cssText = 'position: absolute; left: 0px; top: 0px;';
         document.body.appendChild(span);
-        this.span = span;
+        this.label = span;
     }
 
     Stage.prototype = {
@@ -201,7 +201,7 @@ $ARRAY = {
                 ss = [];
                 quadTree.retrieve({x: x, y: y, width: 0, height: 0}, ss);
             }
-            this.span.innerText = ss.length;
+            this.label.innerText = ss.length;
             for (var i = 0, len = ss.length; i < len; i++) {
                 var s = ss[i];
                 var g = s.geometry;
@@ -220,7 +220,7 @@ $ARRAY = {
                     ss = [];
                     ss = this.quadTree.retrieve(sprite.getRect());
                 }
-                this.span.innerText = ss.length;
+                this.label.innerText = ss.length;
                 $ARRAY.forEach(ss, function(s) {
                     s = s.sprite;
                     if (sprite !== s && sprite.isCollided(s)) {
@@ -232,10 +232,18 @@ $ARRAY = {
         }
     };
 
+    var stage,
+        isPlaying = false;
+
     window.Game = {
-        start: function (spritesNumber) {
-            var stage = new Stage(spritesNumber);
+        init: function (spritesNumber) {
+            stage = new Stage(spritesNumber);
+        },
+        start: function () {
             function draw() {
+                if (!isPlaying) {
+                    return;
+                }
                 stage.clear();
                 stage.move();
                 stage.buildQuadTree();
@@ -244,7 +252,11 @@ $ARRAY = {
                 stage.draw();
                 requestAnimationFrame(draw);
             }
+            isPlaying = true;
             requestAnimationFrame(draw);
+        },
+        pause: function () {
+            isPlaying = false;
         }
     }
 })();
