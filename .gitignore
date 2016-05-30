@@ -38,3 +38,5 @@ Icon
 
 .idea
 node_modules
+
+*.swp
