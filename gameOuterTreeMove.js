@@ -34,7 +34,7 @@ $ARRAY = {
             geometry = {
                 x: Math.random() * this.stage.width,
                 y: Math.random() * this.stage.height,
-                r: Math.random() * 100 + 1
+                r: Math.random() * 9 + 1
             }
         }
         this.geometry = geometry;
@@ -103,10 +103,7 @@ $ARRAY = {
         spriteNumber = spriteNumber || 500;
         this.width = document.body.offsetWidth;
         this.height = document.body.offsetHeight;
-        var canvas = document.createElement('canvas');
-        canvas.width = this.width;
-        canvas.height = this.height;
-        canvas.style.display = 'block';
+        const canvas = createCanvas(this.width, this.height);
 
         this.canvas = canvas;
         document.body.appendChild(canvas);

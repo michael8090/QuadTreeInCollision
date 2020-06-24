@@ -3,19 +3,6 @@
  * Created by michael on 14-2-17.
  */
 
-$ARRAY = {
-    forEach: function (array, method, scope) {
-        var i,
-            len = array.length;
-        scope = scope || window;
-        for (i = 0; i < len; i++) {
-            if (method.call(scope, array[i], i) === false) {
-                return ;
-            }
-        }
-    }
-};
-
 (function () {
     
     var NORMAL_COLOR = 'rgba(0, 0, 0, 0.1)',
@@ -93,12 +80,7 @@ $ARRAY = {
 
     function Stage(spriteNumber) {
         spriteNumber = spriteNumber || 500;
-        this.width = document.body.offsetWidth;
-        this.height = document.body.offsetHeight;
-        var canvas = document.createElement('canvas');
-        canvas.width = this.width;
-        canvas.height = this.height;
-        canvas.style.display = 'block';
+        const canvas = createCanvas(this.width, this.height);
 
         this.canvas = canvas;
         document.body.appendChild(canvas);
