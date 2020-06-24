@@ -3,6 +3,7 @@ import { WithRect } from "./Rect";
 export default class Sprite implements WithRect {
     static maxX = 100;
     static maxY = 100;
+    static defaultColor = 'rgba(0, 0, 0, 0.1)';
     x = Math.random() * Sprite.maxX;
     y = Math.random() * Sprite.maxY;
     r = Math.random() * 9 + 1;
@@ -10,7 +11,7 @@ export default class Sprite implements WithRect {
         x: Math.random() - 0.5,
         y: Math.random() - 0.5
     };
-    color = 'rgba(0, 0, 0, 0.1)';
+    color = Sprite.defaultColor;
     constructor(public ctx: CanvasRenderingContext2D) {}
     move() {
         let t = 5,
